@@ -21,7 +21,7 @@ const ContextProvider = (porps) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
-    setRecentPrompt(input);
+    setRecentPrompt(prompt);
     const response = await run(input);
     const words = response.split(" ");
     words.forEach((word, index) => {
