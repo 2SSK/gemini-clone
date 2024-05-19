@@ -11,13 +11,22 @@ const ContextProvider = (porps) => {
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
 
+  const delayPara = (index, nextWord) => {
+    setTimeout(function () {
+      setResultData((prev) => prev + nextWord);
+    }, 75 * index);
+  };
+
   const onSent = async (prompt) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
     setRecentPrompt(input);
     const response = await run(input);
-    setResultData(response);
+    const words = response.split(" ");
+    words.forEach((word, index) => {
+      delayPara(index, word + " ");
+    });
     setLoading(false);
     setInput("");
   };
