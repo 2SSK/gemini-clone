@@ -21,8 +21,12 @@ const ContextProvider = (porps) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
-    setRecentPrompt(prompt);
-    const response = await run(input);
+    let response;
+    if (prompt !== undefined) {
+      response = await run(prompt);
+      setRecentPrompt(prompt);
+      SetPrevPrompts((prev) => [...prev, prompt]);
+    }
     const words = response.split(" ");
     words.forEach((word, index) => {
       delayPara(index, word + " ");
